@@ -106,6 +106,48 @@ class DiscLobbyForm(object):
 
     def set_lobby_reg_name_suffix(self, lobby_reg_name_suffix):
         self.lobby_reg_name_suffix = lobby_reg_name_suffix
+
+    def set_lobby_reg_address_street1(self, lobby_reg_address_street1):
+        self.lobby_reg_address_street1 = lobby_reg_address_street1
+
+    def set_lobby_reg_address_street2(self, lobby_reg_address_street2):
+        self.lobby_reg_address_street2 = lobby_reg_address_street2
+
+    def set_lobby_reg_address_city(self, lobby_reg_address_city):
+        self.lobby_reg_address_city = lobby_reg_address_city
+
+    def set_lobby_reg_address_state(self, lobby_reg_address_state):
+        self.lobby_reg_address_state = lobby_reg_address_state
+
+    def set_lobby_reg_address_zip(self, lobby_reg_address_zip):
+        self.lobby_reg_address_zip = lobby_reg_address_zip
+        
+    def set_sig_blk_signature(self, sig_blk_signature):
+        self.sig_blk_signature = sig_blk_signature
+
+    def set_sig_blk_name_prefix(self, sig_blk_name_prefix):
+        self.sig_blk_name_prefix = sig_blk_name_prefix
+
+    def set_sig_blk_name_first(self, sig_blk_name_first):
+        self.sig_blk_name_first = sig_blk_name_first
+
+    def set_sig_blk_name_middle(self, sig_blk_name_middle):
+        self.sig_blk_name_middle = sig_blk_name_middle
+
+    def set_sig_blk_name_last(self, sig_blk_name_last):
+        self.sig_blk_name_last = sig_blk_name_last
+
+    def set_sig_blk_name_suffix(self, sig_blk_name_suffix):
+        self.sig_blk_name_suffix = sig_blk_name_suffix
+        
+    def set_sig_blk_title(self, sig_blk_title):
+        self.sig_blk_title = sig_blk_title
+
+    def set_sig_blk_phone(self, sig_blk_phone):
+        self.sig_blk_phone = sig_blk_phone
+
+    def set_sig_blk_date(self, sig_blk_date):
+        self.sig_blk_date = sig_blk_date
         
 class LobbyPerfSrvc(object):
 
