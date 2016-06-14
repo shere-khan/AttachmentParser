@@ -5,6 +5,109 @@ Created on Jun 14, 2016
 '''
 
 class DiscLobbyForm(object):
+    def __init__(self):
+        pass
+
+    def set_type_federal_action(self, type_federal_action):
+        self.type_federal_action = type_federal_action
+
+    def set_status_federal_action(self, status_federal_action):
+        self.status_federal_action = status_federal_action
+
+    def set_report_type(self, report_type):
+        self.report_type = report_type
+
+    def set_material_change_year(self, material_change_year):
+        self.material_change_year = material_change_year
+
+    def set_material_change_qtr(self, material_change_qtr):
+        self.material_change_qtr = material_change_qtr
+        
+    def set_last_report_date(self, last_report_date):
+        self.last_report_date = last_report_date
+        
+    def set_re_is_prime(self, re_is_prime):
+        self.re_is_prime = re_is_prime
+        
+    def set_prime_re_org_name(self, prime_re_org_name):
+        self.prime_re_org_name = prime_re_org_name
+        
+    def set_prime_re_address_street1(self, prime_re_address_street1):
+        self.prime_re_address_street1 = prime_re_address_street1
+        
+    def set_prime_re_address_street2(self, prime_re_address_street2):
+        self.prime_re_address_street2 = prime_re_address_street2
+
+    def set_prime_re_address_city(self, prime_re_address_city):
+        self.prime_re_address_city = prime_re_address_city
+
+    def set_prime_re_address_state(self, prime_re_address_state):
+        self.prime_re_address_state = prime_re_address_state
+
+    def set_prime_re_address_zip(self, prime_re_address_zip):
+        self.prime_re_address_zip = prime_re_address_zip
+        
+    def set_prime_re_cong_dist(self, prime_re_cong_dist):
+        self.prime_re_cong_dist = prime_re_cong_dist
+        
+    def set_sub_awd_re_org_name(self, sub_awd_re_org_name):
+        self.sub_awd_re_org_name = sub_awd_re_org_name
+        
+    def set_sub_awd_re_address_street1(self, sub_awd_re_address_street1):
+        self.sub_awd_re_address_street1 = sub_awd_re_address_street1
+
+    def set_sub_awd_re_address_street2(self, sub_awd_re_address_street2):
+        self.sub_awd_re_address_street2 = sub_awd_re_address_street2
+
+    def set_sub_awd_re_address_city(self, sub_awd_re_address_city):
+        self.sub_awd_re_address_city = sub_awd_re_address_city
+
+    def set_sub_awd_re_address_state(self, sub_awd_re_address_state):
+        self.sub_awd_re_address_state = sub_awd_re_address_state
+
+    def set_sub_awd_re_address_zip(self, sub_awd_re_address_zip):
+        self.sub_awd_re_address_zip = sub_awd_re_address_zip
+        
+    def set_sub_awd_re_cong_dist(self, sub_awd_re_cong_dist):
+        self.sub_awd_re_cong_dist = sub_awd_re_cong_dist
+        
+    def set_tier_value(self, tier_value):
+        self.tier_value = tier_value
+        
+    def set_fdrl_agency_dept(self, fdrl_agency_dept):
+        self.fdrl_agency_dept = fdrl_agency_dept
+        
+    def set_fdrl_program_name(self, fdrl_program_name):
+        self.fdrl_program_name = fdrl_program_name
+
+    def set_fdrl_program_desc(self, fdrl_program_desc):
+        self.fdrl_program_desc = fdrl_program_desc
+        
+    def set_cfda_number(self, cfda_number):
+        self.cfda_number = cfda_number
+        
+    def set_fdrl_action_number(self, fdrl_action_number):
+        self.fdrl_action_number = fdrl_action_number
+        
+    def set_award_amount(self, award_amount):
+        self.award_amount = award_amount
+        
+    def set_lobby_reg_name_prefix(self, lobby_reg_name_prefix):
+        self.lobby_reg_name_prefix = lobby_reg_name_prefix
+
+    def set_lobby_reg_name_first(self, lobby_reg_name_first):
+        self.lobby_reg_name_first = lobby_reg_name_first
+
+    def set_lobby_reg_name_middle(self, lobby_reg_name_middle):
+        self.lobby_reg_name_middle = lobby_reg_name_middle
+
+    def set_lobby_reg_name_last(self, lobby_reg_name_last):
+        self.lobby_reg_name_last = lobby_reg_name_last
+
+    def set_lobby_reg_name_suffix(self, lobby_reg_name_suffix):
+        self.lobby_reg_name_suffix = lobby_reg_name_suffix
+        
+class LobbyPerfSrvc(object):
 
     def __init__(self):
         self.perf_serv_name_prefix = 'NULL'
@@ -12,18 +115,33 @@ class DiscLobbyForm(object):
     def set_perf_srvc_name_prefix(self, perf_serv_name_prefix):
         self.perf_serv_name_prefix = perf_serv_name_prefix
         
-    def set_perf_srvc_name_first(self, perf_serv_name_first):
-        self.perf_serv_name_first = perf_serv_name_first
+    def set_perf_srvc_name_first(self, perf_srvc_name_first):
+        self.perf_serv_name_first = perf_srvc_name_first
 
-    def set_perf_srvc_name_last(self, perf_serv_name_first):
-        self.perf_serv_name_last = perf_serv_name_first
+    def set_perf_srvc_name_last(self, perf_srvc_name_last):
+        self.perf_serv_name_last = perf_srvc_name_last
 
-    def set_perf_srvc_name_middle(self, perf_serv_name_first):
-        self.perf_serv_name_middle = perf_serv_name_first
+    def set_perf_srvc_name_middle(self, perf_srvc_name_middle):
+        self.perf_serv_name_middle = perf_srvc_name_middle
 
-    def set_perf_srvc_name_suffix(self, perf_serv_name_first):
-        self.perf_serv_name_suffix = perf_serv_name_first
-    
+    def set_perf_srvc_name_suffix(self, perf_srvc_name_suffix):
+        self.perf_serv_name_suffix = perf_srvc_name_suffix
+
+    def set_perf_srvc_address_street1(self, perf_srvc_address_street1):
+        self.perf_serv_address_street1 = perf_srvc_address_street1
+
+    def set_perf_srvc_address_street2(self, perf_srvc_address_street2):
+        self.perf_serv_address_street2 = perf_srvc_address_street2
+
+    def set_perf_srvc_address_city(self, perf_srvc_address_city):
+        self.perf_serv_address_city = perf_srvc_address_city
+
+    def set_perf_srvc_address_state(self, perf_srvc_address_state):
+        self.perf_serv_address_state = perf_srvc_address_state
+
+    def set_perf_srvc_address_zip(self, perf_srvc_address_zip):
+        self.perf_serv_address_zip = perf_srvc_address_zip
+
 class KeyContact(object):
    
     def __init__(self):
