@@ -103,3 +103,20 @@ def extract_form_xml(form_xml_file, xml_begin_tag, xml_end_tag):
                 form_xml += line
         return form_xml.replace('\n', '')
         # todo: may have to replace amp&; and such with actual values before inserting
+
+def get_prime_text():
+    return get_lobbying_activities_disc_text() + '/ReportEntity/Prime'
+
+def get_lobby_reg_text():
+    return get_lobbying_activities_disc_text() + '/LobbyingRegistrant'
+
+def get_sub_awd_text():
+    return get_lobbying_activities_disc_text() + '/ReportEntity/SubAwardee'
+
+def get_sig_block_text():
+    return get_lobbying_activities_disc_text() + '/SignatureBlock'
+
+def get_lobbying_activities_disc_text():
+    return 'grant:Forms/SFLLL_1_2:LobbyingActivitiesDisclosure_1_2'
+def get_federal_program_name_text():
+    return '/SFLLL_1_2:FederalProgramName'
