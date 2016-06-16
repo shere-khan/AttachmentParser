@@ -58,7 +58,7 @@ def create_assurances_form(gov_tracking_no, representative_name, representative_
           "'@connector.name')\n"%(select_gms_gg_form_id(gov_tracking_no), representative_name, representative_title, applicant_org,
                                 submitted_date, select_gms_user(gov_tracking_no))
  
-def create_disc_lobby_form(gov_tracking_no):
+def create_disc_lobby_form(gov_tracking_no, dlf):
     "insert into gms_gg_disc_lobby_act_form (gms_gg_disc_lobby_act_form_id, gms_gg_form_id,"\
     "type_federal_action, status_federal_action, report_type, material_change_year, material_change_qtr,"\
     "last_report_date, re_is_prime, prime_re_org_name, prime_re_address_street1, prime_re_address_street2"\
@@ -74,7 +74,7 @@ def create_disc_lobby_form(gov_tracking_no):
     "%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s,"\
     "%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"%(select_gms_gg_form_id(gov_tracking_no))
 
-def create_lobby_perf_srvc(gov_tracking_no):
+def create_lobby_perf_srvc(lps, gov_tracking_no):
     print "insert into gms_gg_lobby_perf_srvc ()"\
     "values"\
     "()"%()
@@ -124,3 +124,6 @@ def get_federal_program_name_text():
 
 def get_sflll_1_2_ns_text():
     return '/SFLLL_1_2:'
+
+def get_ind_per_serv_text():
+    return get_lobbying_activities_disc_text() + get_sflll_1_2_ns_text() + 'IndividualsPerformingServices'
