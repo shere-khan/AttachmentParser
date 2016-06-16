@@ -117,6 +117,10 @@ def get_sig_block_text():
     return get_lobbying_activities_disc_text() + '/SignatureBlock'
 
 def get_lobbying_activities_disc_text():
-    return 'grant:Forms/SFLLL_1_2:LobbyingActivitiesDisclosure_1_2'
+    return 'grant:Forms' + get_sflll_1_2_ns_text() + 'LobbyingActivitiesDisclosure_1_2'
+
 def get_federal_program_name_text():
-    return '/SFLLL_1_2:FederalProgramName'
+    return get_sflll_1_2_ns_text() + 'FederalProgramName'
+
+def get_sflll_1_2_ns_text():
+    return '/SFLLL_1_2:'
