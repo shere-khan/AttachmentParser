@@ -171,18 +171,19 @@ if __name__ == '__main__':
     AP.create_gms_gg_form(gov_tracking_no, 'LOBBY_FORM', lobby_form_xml)
 
     # Create Lobbying Performance Service Individuals objects
-    for lps_node in root.iterfind(AP.get_ind_per_serv_text()):
-        lps = Forms.LobbyPerfSrvc(AP.extract_text('', lps_node, ns))
-        lps.set_perf_srvc_address_city(AP.extract_text('', lps_node, ns))
-        lps.set_perf_srvc_address_state(AP.extract_text('', lps_node, ns))
-        lps.set_perf_srvc_address_street1(AP.extract_text('', lps_node, ns))
-        lps.set_perf_srvc_address_street2(AP.extract_text('', lps_node, ns))
-        lps.set_perf_srvc_address_zip(AP.extract_text('', lps_node, ns))
-        lps.set_perf_srvc_name_first(AP.extract_text('', lps_node, ns))
-        lps.set_perf_srvc_name_last(AP.extract_text('', lps_node, ns))
-        lps.set_perf_srvc_name_middle(AP.extract_text('', lps_node, ns))
-        lps.set_perf_srvc_name_prefix(AP.extract_text('', lps_node, ns))
-        lps.set_perf_srvc_name_suffix(AP.extract_text('', lps_node, ns))
+    for lps_node in root.iterfind(AP.get_ind_per_serv_text(), ns):
+        lps = Forms.LobbyPerfSrvc()
+        tdfkj = AP.get_ind_per_serv_address_text() + AP.get_sflll_1_2_ns_text() + 'City'
+        lps.set_perf_srvc_address_city(AP.extract_text(AP.get_ind_per_serv_address_text() + AP.get_sflll_1_2_ns_text() + 'City', lps_node, ns))
+        lps.set_perf_srvc_address_state(AP.extract_text(AP.get_ind_per_serv_address_text() + AP.get_sflll_1_2_ns_text() + 'State', lps_node, ns))
+        lps.set_perf_srvc_address_street1(AP.extract_text(AP.get_ind_per_serv_address_text() + AP.get_sflll_1_2_ns_text() + 'Street1', lps_node, ns))
+        lps.set_perf_srvc_address_street2(AP.extract_text(AP.get_ind_per_serv_address_text() + AP.get_sflll_1_2_ns_text() + 'Street2', lps_node, ns))
+        lps.set_perf_srvc_address_zip(AP.extract_text(AP.get_ind_per_serv_address_text() + AP.get_sflll_1_2_ns_text() + 'ZipPostalCode', lps_node, ns))
+        lps.set_perf_srvc_name_first(AP.extract_text(AP.get_ind_name_text() + AP.get_glob_lib_text() + 'FirstName', lps_node, ns))
+        lps.set_perf_srvc_name_last(AP.extract_text(AP.get_ind_name_text() + AP.get_glob_lib_text() + 'LastName', lps_node, ns))
+        lps.set_perf_srvc_name_middle(AP.extract_text(AP.get_ind_name_text() + AP.get_glob_lib_text() + 'MiddleName', lps_node, ns))
+        lps.set_perf_srvc_name_prefix(AP.extract_text(AP.get_ind_name_text() + AP.get_glob_lib_text() + 'PrefixName', lps_node, ns))
+        lps.set_perf_srvc_name_suffix(AP.extract_text(AP.get_ind_name_text() + AP.get_glob_lib_text() + 'SuffixName', lps_node, ns))
         
         AP.create_lobby_perf_srvc(lps, gov_tracking_no)
 

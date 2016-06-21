@@ -248,6 +248,16 @@ class LobbyPerfSrvc(object):
 
     def __init__(self):
         self.perf_serv_name_prefix = 'NULL'
+        self.perf_serv_address_city = 'NULL'
+        self.perf_serv_address_state = 'NULL'
+        self.perf_serv_address_street1 = 'NULL'
+        self.perf_serv_address_street2 = 'NULL'
+        self.perf_serv_address_zip = 'NULL' 
+        self.perf_serv_name_first = 'NULL'
+        self.perf_serv_name_last = 'NULL'
+        self.perf_serv_name_middle = 'NULL'
+        self.perf_serv_name_prefix = 'NULL'
+        self.perf_serv_name_suffix = 'NULL'
     
     def set_perf_srvc_name_prefix(self, perf_serv_name_prefix):
         if perf_serv_name_prefix is not None:
