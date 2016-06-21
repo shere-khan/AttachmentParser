@@ -57,145 +57,192 @@ class DiscLobbyForm(object):
         self.sub_awd_re_org_name = 'NULL'
 
     def set_type_federal_action(self, type_federal_action):
-        self.type_federal_action = type_federal_action
+        if type_federal_action is not None:
+            self.type_federal_action = type_federal_action
 
     def set_status_federal_action(self, status_federal_action):
-        self.status_federal_action = status_federal_action
+        if status_federal_action is not None:
+            self.status_federal_action = status_federal_action
 
     def set_report_type(self, report_type):
-        self.report_type = report_type
+        if report_type is not None:
+            self.report_type = report_type
 
     def set_material_change_year(self, material_change_year):
-        self.material_change_year = material_change_year
+        if material_change_year is not None:
+            self.material_change_year = material_change_year
 
     def set_material_change_qtr(self, material_change_qtr):
-        self.material_change_qtr = material_change_qtr
+        if material_change_qtr is not None:
+            self.material_change_qtr = material_change_qtr
         
     def set_last_report_date(self, last_report_date):
-        self.last_report_date = last_report_date
+        if last_report_date is not None:
+            self.last_report_date = last_report_date
         
     def set_re_is_prime(self, re_is_prime):
-        self.re_is_prime = re_is_prime
+        if re_is_prime is not None:
+            self.re_is_prime = re_is_prime
         
     def set_prime_re_org_name(self, prime_re_org_name):
-        self.prime_re_org_name = prime_re_org_name
+        if prime_re_org_name is not None:
+            self.prime_re_org_name = prime_re_org_name
         
     def set_prime_re_address_street1(self, prime_re_address_street1):
-        self.prime_re_address_street1 = prime_re_address_street1
+        if prime_re_address_street1 is not None:
+            self.prime_re_address_street1 = prime_re_address_street1
         
     def set_prime_re_address_street2(self, prime_re_address_street2):
-        self.prime_re_address_street2 = prime_re_address_street2
+        if prime_re_address_street2 is not None:
+            self.prime_re_address_street2 = prime_re_address_street2
 
     def set_prime_re_address_city(self, prime_re_address_city):
-        self.prime_re_address_city = prime_re_address_city
+        if prime_re_address_city is not None:
+            self.prime_re_address_city = prime_re_address_city
 
     def set_prime_re_address_state(self, prime_re_address_state):
-        self.prime_re_address_state = prime_re_address_state
+        if prime_re_address_state is not None:
+            self.prime_re_address_state = prime_re_address_state
 
     def set_prime_re_address_zip(self, prime_re_address_zip):
-        self.prime_re_address_zip = prime_re_address_zip
+        if prime_re_address_zip is not None:
+            self.prime_re_address_zip = prime_re_address_zip
         
     def set_prime_re_cong_dist(self, prime_re_cong_dist):
-        self.prime_re_cong_dist = prime_re_cong_dist
+        if prime_re_cong_dist is not None:
+            self.prime_re_cong_dist = prime_re_cong_dist
         
     def set_sub_awd_re_org_name(self, sub_awd_re_org_name):
-        self.sub_awd_re_org_name = sub_awd_re_org_name
+        if sub_awd_re_org_name is not None:
+            self.sub_awd_re_org_name = sub_awd_re_org_name
         
     def set_sub_awd_re_address_street1(self, sub_awd_re_address_street1):
-        self.sub_awd_re_address_street1 = sub_awd_re_address_street1
+        if sub_awd_re_address_street1 is not None:
+            self.sub_awd_re_address_street1 = sub_awd_re_address_street1
 
     def set_sub_awd_re_address_street2(self, sub_awd_re_address_street2):
-        self.sub_awd_re_address_street2 = sub_awd_re_address_street2
+        if sub_awd_re_address_street2 is not None:
+            self.sub_awd_re_address_street2 = sub_awd_re_address_street2
 
     def set_sub_awd_re_address_city(self, sub_awd_re_address_city):
-        self.sub_awd_re_address_city = sub_awd_re_address_city
+        if sub_awd_re_address_city is not None:
+            self.sub_awd_re_address_city = sub_awd_re_address_city
 
     def set_sub_awd_re_address_state(self, sub_awd_re_address_state):
-        self.sub_awd_re_address_state = sub_awd_re_address_state
+        if sub_awd_re_address_state is not None:
+            self.sub_awd_re_address_state = sub_awd_re_address_state
 
     def set_sub_awd_re_address_zip(self, sub_awd_re_address_zip):
-        self.sub_awd_re_address_zip = sub_awd_re_address_zip
+        if sub_awd_re_address_zip is not None:
+            self.sub_awd_re_address_zip = sub_awd_re_address_zip
         
     def set_sub_awd_re_cong_dist(self, sub_awd_re_cong_dist):
-        self.sub_awd_re_cong_dist = sub_awd_re_cong_dist
+        if sub_awd_re_cong_dist is not None:
+            self.sub_awd_re_cong_dist = sub_awd_re_cong_dist
         
     def set_tier_value(self, tier_value):
-        self.tier_value = tier_value
+        if tier_value is not None:
+            self.tier_value = tier_value
         
     def set_fdrl_agency_dept(self, fdrl_agency_dept):
-        self.fdrl_agency_dept = fdrl_agency_dept
+        if fdrl_agency_dept is not None:
+            self.fdrl_agency_dept = fdrl_agency_dept
         
     def set_fdrl_program_name(self, fdrl_program_name):
-        self.fdrl_program_name = fdrl_program_name
+        if fdrl_program_name is not None:
+            self.fdrl_program_name = fdrl_program_name
 
     def set_fdrl_program_desc(self, fdrl_program_desc):
-        self.fdrl_program_desc = fdrl_program_desc
+        if fdrl_program_desc is not None:
+            self.fdrl_program_desc = fdrl_program_desc
         
     def set_cfda_number(self, cfda_number):
-        self.cfda_number = cfda_number
+        if cfda_number is not None:
+            self.cfda_number = cfda_number
         
     def set_fdrl_action_number(self, fdrl_action_number):
-        self.fdrl_action_number = fdrl_action_number
+        if fdrl_action_number is not None:
+            self.fdrl_action_number = fdrl_action_number
         
     def set_award_amount(self, award_amount):
-        self.award_amount = award_amount
+        if award_amount is not None:
+            self.award_amount = award_amount
         
     def set_lobby_reg_name_prefix(self, lobby_reg_name_prefix):
-        self.lobby_reg_name_prefix = lobby_reg_name_prefix
+        if lobby_reg_name_prefix is not None:
+            self.lobby_reg_name_prefix = lobby_reg_name_prefix
 
     def set_lobby_reg_name_first(self, lobby_reg_name_first):
-        self.lobby_reg_name_first = lobby_reg_name_first
+        if lobby_reg_name_first is not None:
+            self.lobby_reg_name_first = lobby_reg_name_first
 
     def set_lobby_reg_name_middle(self, lobby_reg_name_middle):
-        self.lobby_reg_name_middle = lobby_reg_name_middle
+        if lobby_reg_name_middle is not None:
+            self.lobby_reg_name_middle = lobby_reg_name_middle
 
     def set_lobby_reg_name_last(self, lobby_reg_name_last):
-        self.lobby_reg_name_last = lobby_reg_name_last
+        if lobby_reg_name_last is not None:
+            self.lobby_reg_name_last = lobby_reg_name_last
 
     def set_lobby_reg_name_suffix(self, lobby_reg_name_suffix):
-        self.lobby_reg_name_suffix = lobby_reg_name_suffix
+        if lobby_reg_name_suffix is not None:
+            self.lobby_reg_name_suffix = lobby_reg_name_suffix
 
     def set_lobby_reg_address_street1(self, lobby_reg_address_street1):
-        self.lobby_reg_address_street1 = lobby_reg_address_street1
+        if lobby_reg_address_street1 is not None:
+            self.lobby_reg_address_street1 = lobby_reg_address_street1
 
     def set_lobby_reg_address_street2(self, lobby_reg_address_street2):
-        self.lobby_reg_address_street2 = lobby_reg_address_street2
+        if lobby_reg_address_street2 is not None:
+            self.lobby_reg_address_street2 = lobby_reg_address_street2
 
     def set_lobby_reg_address_city(self, lobby_reg_address_city):
-        self.lobby_reg_address_city = lobby_reg_address_city
+        if lobby_reg_address_city is not None:
+            self.lobby_reg_address_city = lobby_reg_address_city
 
     def set_lobby_reg_address_state(self, lobby_reg_address_state):
-        self.lobby_reg_address_state = lobby_reg_address_state
+        if lobby_reg_address_state is not None:
+            self.lobby_reg_address_state = lobby_reg_address_state
 
     def set_lobby_reg_address_zip(self, lobby_reg_address_zip):
-        self.lobby_reg_address_zip = lobby_reg_address_zip
+        if lobby_reg_address_zip is not None:
+            self.lobby_reg_address_zip = lobby_reg_address_zip
         
     def set_sig_blk_signature(self, sig_blk_signature):
-        self.sig_blk_signature = sig_blk_signature
+        if sig_blk_signature is not None:
+            self.sig_blk_signature = sig_blk_signature
 
     def set_sig_blk_name_prefix(self, sig_blk_name_prefix):
-        self.sig_blk_name_prefix = sig_blk_name_prefix
+        if sig_blk_name_prefix is not None:
+            self.sig_blk_name_prefix = sig_blk_name_prefix
 
     def set_sig_blk_name_first(self, sig_blk_name_first):
-        self.sig_blk_name_first = sig_blk_name_first
+        if sig_blk_name_first is not None:
+            self.sig_blk_name_first = sig_blk_name_first
 
     def set_sig_blk_name_middle(self, sig_blk_name_middle):
-        self.sig_blk_name_middle = sig_blk_name_middle
+        if sig_blk_name_middle is not None:
+            self.sig_blk_name_middle = sig_blk_name_middle
 
     def set_sig_blk_name_last(self, sig_blk_name_last):
-        self.sig_blk_name_last = sig_blk_name_last
+        if sig_blk_name_last is not None:
+            self.sig_blk_name_last = sig_blk_name_last
 
     def set_sig_blk_name_suffix(self, sig_blk_name_suffix):
-        self.sig_blk_name_suffix = sig_blk_name_suffix
+        if sig_blk_name_suffix is not None:
+            self.sig_blk_name_suffix = sig_blk_name_suffix
         
     def set_sig_blk_title(self, sig_blk_title):
-        self.sig_blk_title = sig_blk_title
+        if sig_blk_title is not None:
+            self.sig_blk_title = sig_blk_title
 
     def set_sig_blk_phone(self, sig_blk_phone):
-        self.sig_blk_phone = sig_blk_phone
+        if sig_blk_phone is not None:
+            self.sig_blk_phone = sig_blk_phone
 
     def set_sig_blk_date(self, sig_blk_date):
-        self.sig_blk_date = sig_blk_date
+        if sig_blk_date is not None:
+            self.sig_blk_date = sig_blk_date
         
 class LobbyPerfSrvc(object):
 

@@ -72,7 +72,7 @@ def create_disc_lobby_form(gov_tracking_no, dlf):
     ")\nvalues\n"\
     "(gms_gg_disc_lobby_act_form_seq.nextval, (%s), %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, "\
     "%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s,"\
-    "%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"%(select_gms_gg_form_id(gov_tracking_no))
+    "%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"%(select_gms_gg_form_id(gov_tracking_no))
 
 def create_lobby_perf_srvc(lps, gov_tracking_no):
     print "insert into gms_gg_lobby_perf_srvc ()"\
@@ -104,17 +104,26 @@ def extract_form_xml(form_xml_file, xml_begin_tag, xml_end_tag):
         return form_xml.replace('\n', '')
         # todo: may have to replace amp&; and such with actual values before inserting
 
-def get_prime_text():
-    return get_lobbying_activities_disc_text() + '/ReportEntity/Prime'
+def get_report_entity_text():
+    return get_lobbying_activities_disc_text() + get_sflll_1_2_ns_text() + 'ReportEntity'
+
+def get_reporting_entity_text():
+    return get_report_entity_text() + get_sflll_1_2_ns_text() + 'ReportingEntity'
+
+def get_reporting_entity_address_text():
+    return get_reporting_entity_text() + get_sflll_1_2_ns_text() + 'Address'
 
 def get_lobby_reg_text():
-    return get_lobbying_activities_disc_text() + '/LobbyingRegistrant'
+    return get_lobbying_activities_disc_text() + get_sflll_1_2_ns_text() + 'LobbyingRegistrant'
 
 def get_sub_awd_text():
-    return get_lobbying_activities_disc_text() + '/ReportEntity/SubAwardee'
+    return get_lobbying_activities_disc_text() + get_sflll_1_2_ns_text() + 'ReportEntity' + get_sflll_1_2_ns_text() + 'SubAwardee'
 
 def get_sig_block_text():
-    return get_lobbying_activities_disc_text() + '/SignatureBlock'
+    return get_lobbying_activities_disc_text() + get_sflll_1_2_ns_text() + 'SignatureBlock'
+
+def get_signature_block_name_text():
+    return get_sig_block_text() + get_sflll_1_2_ns_text() + 'Name' 
 
 def get_lobbying_activities_disc_text():
     return 'grant:Forms' + get_sflll_1_2_ns_text() + 'LobbyingActivitiesDisclosure_1_2'
@@ -125,5 +134,14 @@ def get_federal_program_name_text():
 def get_sflll_1_2_ns_text():
     return '/SFLLL_1_2:'
 
+def get_glob_lib_text():
+    return '/globLib:'
+
 def get_ind_per_serv_text():
     return get_lobbying_activities_disc_text() + get_sflll_1_2_ns_text() + 'IndividualsPerformingServices'
+
+def get_lob_reg_address_text():
+    return get_lobby_reg_text() + get_sflll_1_2_ns_text() + 'Address'
+
+def get_lob_reg_name_text():
+    return get_lobby_reg_text() + get_sflll_1_2_ns_text() + 'IndividualName'
