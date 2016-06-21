@@ -250,34 +250,44 @@ class LobbyPerfSrvc(object):
         self.perf_serv_name_prefix = 'NULL'
     
     def set_perf_srvc_name_prefix(self, perf_serv_name_prefix):
-        self.perf_serv_name_prefix = perf_serv_name_prefix
+        if perf_serv_name_prefix is not None:
+            self.perf_serv_name_prefix = perf_serv_name_prefix
         
     def set_perf_srvc_name_first(self, perf_srvc_name_first):
-        self.perf_serv_name_first = perf_srvc_name_first
+        if perf_srvc_name_first is not None:
+            self.perf_serv_name_first = perf_srvc_name_first
 
     def set_perf_srvc_name_last(self, perf_srvc_name_last):
-        self.perf_serv_name_last = perf_srvc_name_last
+        if perf_srvc_name_last is not None:
+            self.perf_serv_name_last = perf_srvc_name_last
 
     def set_perf_srvc_name_middle(self, perf_srvc_name_middle):
-        self.perf_serv_name_middle = perf_srvc_name_middle
+        if perf_srvc_name_middle is not None:
+            self.perf_serv_name_middle = perf_srvc_name_middle
 
     def set_perf_srvc_name_suffix(self, perf_srvc_name_suffix):
-        self.perf_serv_name_suffix = perf_srvc_name_suffix
+        if perf_srvc_name_suffix is not None:
+            self.perf_serv_name_suffix = perf_srvc_name_suffix
 
     def set_perf_srvc_address_street1(self, perf_srvc_address_street1):
-        self.perf_serv_address_street1 = perf_srvc_address_street1
+        if perf_srvc_address_street1 is not None:
+            self.perf_serv_address_street1 = perf_srvc_address_street1
 
     def set_perf_srvc_address_street2(self, perf_srvc_address_street2):
-        self.perf_serv_address_street2 = perf_srvc_address_street2
+        if perf_srvc_address_street2 is not None:
+            self.perf_serv_address_street2 = perf_srvc_address_street2
 
     def set_perf_srvc_address_city(self, perf_srvc_address_city):
-        self.perf_serv_address_city = perf_srvc_address_city
+        if perf_srvc_address_city is not None:
+            self.perf_serv_address_city = perf_srvc_address_city
 
     def set_perf_srvc_address_state(self, perf_srvc_address_state):
-        self.perf_serv_address_state = perf_srvc_address_state
+        if perf_srvc_address_state is not None:
+            self.perf_serv_address_state = perf_srvc_address_state
 
     def set_perf_srvc_address_zip(self, perf_srvc_address_zip):
-        self.perf_serv_address_zip = perf_srvc_address_zip
+        if perf_srvc_address_zip is not None:
+            self.perf_serv_address_zip = perf_srvc_address_zip
 
 class KeyContact(object):
    
@@ -304,61 +314,81 @@ class KeyContact(object):
         self.fax = 'NULL'
     
     def set_contact_order(self, contact_order):
-        self.contact_order = contact_order
+        if contact_order is not None:
+            self.contact_order = contact_order
         
     def set_project_role(self, project_role):
-        self.project_role = project_role
+        if project_role is not None:
+            self.project_role = project_role
         
     def set_first_name(self, first_name):
-        self.first_name = first_name;
+        if first_name is not None:
+            self.first_name = first_name;
         
     def set_middle_name(self, middle_name):
-        self.middle_name = middle_name;
+        if middle_name is not None:
+            self.middle_name = middle_name;
         
     def set_last_name(self, last_name):
-        self.last_name = last_name
+        if last_name is not None:
+            self.last_name = last_name
         
     def set_suffix_name(self, suffix_name):
-        self.suffix_name = suffix_name
+        if suffix_name is not None:
+            self.suffix_name = suffix_name
 
     def set_prefix_name(self, prefix_name):
-        self.prefix_name = prefix_name
+        if prefix_name is not None:
+            self.prefix_name = prefix_name
     
     def set_contact_title(self, contact_title):
-        self.contact_title = contact_title
+        if contact_title is not None:
+            self.contact_title = contact_title
         
     def set_org_affil(self, org_affil):
-        self.org_affil = org_affil
+        if org_affil is not None:
+            self.org_affil = org_affil
         
     def set_street1(self, street1):
-        self.street1 = street1
+        if street1 is not None:
+            self.street1 = street1
 
     def set_street2(self, street2):
-        self.street2 = street2
+        if street2 is not None:
+            self.street2 = street2
 
     def set_city(self, city):
-        self.city = city
+        if city is not None:
+            self.city = city
 
     def set_state(self, state):
-        self.state = state
+        if state is not None:
+            self.state = state
 
     def set_zip_code(self, zip_code):
-        self.zip_code = zip_code
+        if zip_code is not None:
+            self.zip_code = zip_code
 
     def set_country(self, country):
-        self.country = country
+        if country is not None:
+            self.country = country
 
     def set_phone(self, phone):
-        self.phone = phone
+        if phone is not None:
+            self.phone = phone
 
     def set_email(self, email):
-        self.email = email
+        if email is not None:
+            self.email = email
 
     def set_province(self, province):
-        self.province = province
+        if province is not None:
+            self.province = province
 
     def set_county(self, county):
-        self.county = county
+        if county is not None:
+            self.county = county
 
     def set_fax(self, fax):
-        self.fax = fax
+        if fax is not None:
+            self.fax = fax

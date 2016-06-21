@@ -62,17 +62,27 @@ def create_disc_lobby_form(gov_tracking_no, dlf):
     "insert into gms_gg_disc_lobby_act_form (gms_gg_disc_lobby_act_form_id, gms_gg_form_id,"\
     "type_federal_action, status_federal_action, report_type, material_change_year, material_change_qtr,"\
     "last_report_date, re_is_prime, prime_re_org_name, prime_re_address_street1, prime_re_address_street2"\
-    "prime_re_address_city, prime_re_address_state, prime_re_address_zip, prime_re_cong_dist, sub_awd_re_org_name,"\
-    "sub_awd_re_address_street1, sub_awd_re_address_street2, sub_awd_re_address_city, sub_awd_re_address_state, sub_awd_re_address_zip,"\
-    "sub_awd_re_cong_dist, tier_value, fdrl_agency_dept, fdrl_program_name, fdrl_program_desc, cfda_number,"\
+    "prime_re_address_city, prime_re_address_state, prime_re_address_zip, prime_re_cong_dist, "\
+    "fdrl_agency_dept, fdrl_program_name, fdrl_program_desc, cfda_number,"\
     "fdrl_action_number, award_amount, lobby_reg_name_prefix, lobby_reg_name_first, lobby_reg_name_middle, lobby_reg_name_last"\
     "lobby_reg_name_suffix, lobby_reg_address_street1, lobby_reg_address_street2, lobby_reg_address_city, lobby_reg_address_state,"\
     "lobby_reg_address_zip, sig_blk_name_prefix, sig_blk_name_first, sig_blk_name_middle, sig_blk_name_last,"\
     "sig_blk_name_suffix, sig_blk_phone, sig_blk_date, created_user_id, created_date, created_ip"\
     ")\nvalues\n"\
-    "(gms_gg_disc_lobby_act_form_seq.nextval, (%s), %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, "\
-    "%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s,"\
-    "%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"%(select_gms_gg_form_id(gov_tracking_no))
+    "(gms_gg_disc_lobby_act_form_seq.nextval, (%s), %s, %s, %s, %s, %s, "\
+    "%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s,"\
+    "%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, (%s), %s, %s"\
+    "%s)"%(select_gms_gg_form_id(gov_tracking_no), dlf.get_type_federal_action(), dlf.get_status_federal_action(),
+           dlf.get_report_type(), dlf.get_material_change_year(), dlf.get_material_change_qtr(), dlf.get_last_report_date(),
+           dlf.get_re_is_prime(), dlf.get_prime_re_org_name(), dlf.get_re_address_street1(), dlf.get_prime_re_address_street2(),
+           dlf.get_prime_re_address_city(), dlf.get_prime_re_address_state(), dlf.get_prime_re_address_zip(),
+           dlf.get_prime_re_cong_dist(), dlf.get_fdrl_agency_dept(), dlf.get_fdrl_program_name(), dlf.get_fdrl_program_desc(),
+           dlf.get_cfda_number(), dlf.get_fdrl_action_number(), dlf.get_award_amount(), dlf.get_lobby_reg_name_prefix(),
+           dlf.get_lobby_reg_name_first(), dlf.get_lobby_reg_name_middle(), dlf.get_lobby_reg_name_last(), dlf.get_lobby_reg_name_suffix(),
+           dlf.get_lobby_reg_address_street1(), dlf.get_lobby_reg_address_street2(), dlf.get_lobby_reg_address_city(),
+           dlf.get_lobby_reg_address_state(), dlf.get_lobby_reg_address_zip(), dlf.get_sig_blk_name_prefix(),
+           dlf.get_sig_blk_name_first(), dlf.get_sig_blk_name_middle(), dlf.get_sig_blk_name_last(), dlf.get_sig_blk_name_suffix(),
+           dlf.get_sig_blk_phone(), dlf.get_sig_blk_date, select_gms_user(gov_tracking_no), "'sysdate'", "'@connector.name'")
 
 def create_lobby_perf_srvc(lps, gov_tracking_no):
     print "insert into gms_gg_lobby_perf_srvc ()"\
