@@ -93,7 +93,7 @@ def create_lobby_perf_srvc(lps, gov_tracking_no):
         "perf_srvc_address_zip, created_user_id, created_date,\n"\
         "created_ip)\n"\
     "values\n"\
-    "(gms_gg_lobby_perf_srvc_seq.nextval, (), %s, %s, %s, %s, %s, %s, %s, %s, %s,"\
+    "(gms_gg_lobby_perf_srvc_seq.nextval, (%s), %s, %s, %s, %s, %s, %s, %s, %s, %s,"\
     "%s, %s, %s, %s)"%(select_disc_lobby_form_id(gov_tracking_no), lps.perf_serv_name_prefix,
                        lps.perf_serv_name_first, lps.perf_serv_name_middle, lps.perf_serv_name_last,
                        lps.perf_serv_name_suffix, lps.perf_serv_address_street1, lps.perf_serv_address_street2,
