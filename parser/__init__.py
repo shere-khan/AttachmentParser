@@ -1,11 +1,13 @@
 import xml.etree.ElementTree as ET
 
 import Forms
+import sys
+import glob
 
 import AttachmentParser as AP
 
-if __name__ == '__main__':
-    xml_file = 'c:\\Users\\barryjus\\Documents\\ggc\\prod_attachment_data\\test\\test_data2_key_contacts.xml'
+def process(xml_file):
+    # xml_file = xml_file.replace('\\', '\\\\')
     tree = ET.parse(xml_file);
     root = tree.getroot();
     
@@ -42,38 +44,38 @@ if __name__ == '__main__':
     # Get APPLICANT_ORG_NAME text value
     app_org_name = AP.extract_text('grant:Forms/Key_Contacts:Key_Contacts/Key_Contacts:ApplicantOrganizationName', root, ns)
 
-    AP.create_gg_key_contact_form(gov_tracking_no, app_org_name)
+    # AP.create_gg_key_contact_form(gov_tracking_no, app_org_name)
 
     # Create GMS_GG_KEY_CONTACT_FORM record
-    contact_order = 0
-    for elem in root.findall('grant:Forms/Key_Contacts:Key_Contacts/Key_Contacts:RoleOnProject', ns):
-        key_contact = Forms.KeyContact()
+    # contact_order = 0
+    # for elem in root.findall('grant:Forms/Key_Contacts:Key_Contacts/Key_Contacts:RoleOnProject', ns):
+        # key_contact = Forms.KeyContact()
 
-        key_contact.set_contact_order(contact_order)
-
-        key_contact.set_project_role(AP.extract_text('Key_Contacts:ContactProjectRole', elem, ns))
-        key_contact.set_first_name(AP.extract_text('Key_Contacts:ContactName/globLib:FirstName', elem, ns))
-        key_contact.set_middle_name(AP.extract_text('Key_Contacts:ContactName/globLib:MiddleName', elem, ns))
-        key_contact.set_last_name(AP.extract_text('Key_Contacts:ContactName/globLib:LastName', elem, ns))
-        key_contact.set_suffix_name(AP.extract_text('Key_Contacts:ContactName/globLib:SuffixName', elem, ns))
-        key_contact.set_prefix_name(AP.extract_text('Key_Contacts:ContactName/globLib:PrefixName', elem, ns))
-        key_contact.set_contact_title(AP.extract_text('Key_Contacts:ContactTitle', elem, ns))
-        key_contact.set_org_affil(AP.extract_text('Key_Contacts:ContactOrganizationalAffiliation', elem, ns))
-        key_contact.set_street1(AP.extract_text('Key_Contacts:ContactAddress/globLib:Street1', elem, ns))
-        key_contact.set_street2(AP.extract_text('Key_Contacts:ContactAddress/globLib:Street2', elem, ns))
-        key_contact.set_city(AP.extract_text('Key_Contacts:ContactAddress/globLib:City', elem, ns))
-        key_contact.set_state(AP.extract_text('Key_Contacts:ContactAddress/globLib:State', elem, ns))
-        key_contact.set_zip_code(AP.extract_text('Key_Contacts:ContactAddress/globLib:ZipPostalCode', elem, ns))
-        key_contact.set_country(AP.extract_text('Key_Contacts:ContactAddress/globLib:Country', elem, ns))
-        key_contact.set_county(AP.extract_text('Key_Contacts:ContactAddress/globLib:County', elem, ns))
-        key_contact.set_province(AP.extract_text('Key_Contacts:ContactAddress/globLib:Province', elem, ns))
-        key_contact.set_fax(AP.extract_text('Key_Contacts:ContactAddress/globLib:Fax', elem, ns))
-        key_contact.set_phone(AP.extract_text('Key_Contacts:ContactPhone', elem, ns))
-        key_contact.set_email(AP.extract_text('Key_Contacts:ContactEmail', elem, ns))
+        # key_contact.set_contact_order(contact_order)
+ 
+        # key_contact.set_project_role(AP.extract_text('Key_Contacts:ContactProjectRole', elem, ns))
+        # key_contact.set_first_name(AP.extract_text('Key_Contacts:ContactName/globLib:FirstName', elem, ns))
+        # key_contact.set_middle_name(AP.extract_text('Key_Contacts:ContactName/globLib:MiddleName', elem, ns))
+        # key_contact.set_last_name(AP.extract_text('Key_Contacts:ContactName/globLib:LastName', elem, ns))
+        # key_contact.set_suffix_name(AP.extract_text('Key_Contacts:ContactName/globLib:SuffixName', elem, ns))
+        # key_contact.set_prefix_name(AP.extract_text('Key_Contacts:ContactName/globLib:PrefixName', elem, ns))
+        # key_contact.set_contact_title(AP.extract_text('Key_Contacts:ContactTitle', elem, ns))
+        # key_contact.set_org_affil(AP.extract_text('Key_Contacts:ContactOrganizationalAffiliation', elem, ns))
+        # key_contact.set_street1(AP.extract_text('Key_Contacts:ContactAddress/globLib:Street1', elem, ns))
+        # key_contact.set_street2(AP.extract_text('Key_Contacts:ContactAddress/globLib:Street2', elem, ns))
+        # key_contact.set_city(AP.extract_text('Key_Contacts:ContactAddress/globLib:City', elem, ns))
+        # key_contact.set_state(AP.extract_text('Key_Contacts:ContactAddress/globLib:State', elem, ns))
+        # key_contact.set_zip_code(AP.extract_text('Key_Contacts:ContactAddress/globLib:ZipPostalCode', elem, ns))
+        # key_contact.set_country(AP.extract_text('Key_Contacts:ContactAddress/globLib:Country', elem, ns))
+        # key_contact.set_county(AP.extract_text('Key_Contacts:ContactAddress/globLib:County', elem, ns))
+        # key_contact.set_province(AP.extract_text('Key_Contacts:ContactAddress/globLib:Province', elem, ns))
+        # key_contact.set_fax(AP.extract_text('Key_Contacts:ContactAddress/globLib:Fax', elem, ns))
+        # key_contact.set_phone(AP.extract_text('Key_Contacts:ContactPhone', elem, ns))
+        # key_contact.set_email(AP.extract_text('Key_Contacts:ContactEmail', elem, ns))
 
         # Create GMS_GG_KEY_CONTACT records
-        AP.create_gg_key_contact(gov_tracking_no, key_contact)
-        contact_order+=1
+        # AP.create_gg_key_contact(gov_tracking_no, key_contact)
+        # contact_order+=1
     
     # Extract Assurances Form XML string
     assurances_form_xml = AP.extract_form_xml(xml_file, '<SF424B:Assurances', '</SF424B:Assurances>')
@@ -90,10 +92,9 @@ if __name__ == '__main__':
     AP.create_assurances_form(gov_tracking_no, rep_name, rep_title, app_org_name, submitted_date)
 
     # Extract Human Subject Form XML String
-    human_sub_form_xml = AP.extract_form_xml(xml_file, '<ProtectionofHumanSubjects:ProtectionofHumanSubjects',
-                                            '</ProtectionofHumanSubjects:ProtectionofHumanSubjects>')
+    # human_sub_form_xml = AP.extract_form_xml(xml_file, '<ProtectionofHumanSubjects:ProtectionofHumanSubjects', '</ProtectionofHumanSubjects:ProtectionofHumanSubjects>')
 
-    AP.create_gms_gg_form(gov_tracking_no, 'HUMAN_SUBJECT_FORM', human_sub_form_xml)
+    #AP.create_gms_gg_form(gov_tracking_no, 'HUMAN_SUBJECT_FORM', human_sub_form_xml)
 
     # Extract Disc Lobby Form XML String
     disc_lobby_form_xml = AP.extract_form_xml(xml_file, '<SFLLL_1_2:LobbyingActivitiesDisclosure',
@@ -167,8 +168,8 @@ if __name__ == '__main__':
     AP.create_disc_lobby_form(gov_tracking_no, dlf)
 
     # Extract Lobby Form XML String
-    lobby_form_xml = AP.extract_form_xml(xml_file, '<SLFFF_1_2:LobbyingForm', '</SLFFF_1_2:LobbyingForm')
-    AP.create_gms_gg_form(gov_tracking_no, 'LOBBY_FORM', lobby_form_xml)
+    # lobby_form_xml = AP.extract_form_xml(xml_file, '<SLFFF_1_2:LobbyingForm', '</SLFFF_1_2:LobbyingForm')
+    # AP.create_gms_gg_form(gov_tracking_no, 'LOBBY_FORM', lobby_form_xml)
 
     # Create Lobbying Performance Service Individuals objects
     for lps_node in root.iterfind(AP.get_ind_per_serv_text(), ns):
@@ -187,6 +188,22 @@ if __name__ == '__main__':
         
         AP.create_lobby_perf_srvc(lps, gov_tracking_no)
 
+    #lobby_form_xml = AP.extract_form_xml(xml_file, '<SFLLL_1_2:LobbyingForm', '</SFLLL_1_2:LobbyingActivitiesDisclosure')
+    # If null, search for other form of tag
+    # if disc_lobby_form_xml is None:
+        # disc_lobby_form_xml = AP.extract_form_xml(xml_file, '<SFLLL:LobbyingActivitiesDisclosure', '</SFLLL:LobbyingActivitiesDisclosure')
+        
+    #AP.create_gms_gg_form(gov_tracking_no, 'DISC_LOBBY_FORM', disc_lobby_form_xml)
     # create_gms_gg_form(gov_tracking_no, 'LOBBY_FORM', lobby_form_xml)
     
     # create_lobby_form(gov_tracking_no)
+
+if __name__ == '__main__':
+    files = glob.glob(sys.argv[1] + "/*.xml")
+    print files
+    count = 0
+    for attachment in files:
+        print "\n" + str(count) + "\n"
+        process(attachment)
+        count+=1
+    

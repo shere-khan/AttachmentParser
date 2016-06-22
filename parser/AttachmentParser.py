@@ -72,7 +72,7 @@ def create_disc_lobby_form(gov_tracking_no, dlf):
           "(gms_gg_disc_lobby_act_form_seq.nextval, (%s),\n%s, %s, %s, %s, %s, "\
           "%s, %s, %s, %s,\n%s, %s, %s, %s, %s, %s, %s, %s, %s, %s,\n%s, %s, %s,"\
           "%s, %s, %s, %s, %s, %s, %s,\n%s, %s, %s, %s,\n%s, %s, %s, (%s), %s, %s"\
-          "%s)"%(select_gms_gg_form_id(gov_tracking_no), dlf.type_federal_action, dlf.status_federal_action,
+          "%s)\n"%(select_gms_gg_form_id(gov_tracking_no), dlf.type_federal_action, dlf.status_federal_action,
                  dlf.report_type, dlf.material_change_year, dlf.material_change_qtr, dlf.last_report_date,
                  dlf.re_is_prime, dlf.prime_re_org_name, dlf.prime_re_address_street1, dlf.prime_re_address_street2,
                  dlf.prime_re_address_city, dlf.prime_re_address_state, dlf.prime_re_address_zip,
@@ -93,23 +93,23 @@ def create_lobby_perf_srvc(lps, gov_tracking_no):
         "perf_srvc_address_zip, created_user_id, created_date,\n"\
         "created_ip)\n"\
     "values\n"\
-    "(gms_gg_lobby_perf_srvc_seq.nextval, (%s), %s, %s, %s, %s, %s, %s, %s, %s, %s,"\
-    "%s, %s, %s, %s)"%(select_disc_lobby_form_id(gov_tracking_no), lps.perf_serv_name_prefix,
+    "(gms_gg_lobby_perf_srvc_seq.nextval, (%s), %s, %s, %s, %s, %s,\n %s, %s, %s, %s,"\
+    "%s,\n (%s), %s, %s)"%(select_disc_lobby_form_id(gov_tracking_no), lps.perf_serv_name_prefix,
                        lps.perf_serv_name_first, lps.perf_serv_name_middle, lps.perf_serv_name_last,
                        lps.perf_serv_name_suffix, lps.perf_serv_address_street1, lps.perf_serv_address_street2,
                        lps.perf_serv_address_city, lps.perf_serv_address_state, lps.perf_serv_address_zip,
                        select_gms_user(gov_tracking_no), "'sysdate'", "'@connector.name'")
 
 def select_disc_lobby_form_id(gov_tracking_no):
-    print "select gms_gg_disc_lobby_form_id from gms_gg_disc_lobby_form where"\
-          " gms_gg_form_id = (%s)"%(select_gms_gg_form_id(gov_tracking_no))
+    return "select gms_gg_disc_lobby_form_id from gms_gg_disc_lobby_form where\n"\
+          " gms_gg_form_id = (%s)\n"%(select_gms_gg_form_id(gov_tracking_no))
 
 def create_lobby_form(gov_tracking_no):
     pass
 
 def extract_text(xpath, root_node, ns):
     node = root_node.find(xpath, ns)
-    if node is not None:
+    if node is not None and node.text is not None:
         return node.text.replace('\n', '')
 
 def extract_form_xml(form_xml_file, xml_begin_tag, xml_end_tag):
