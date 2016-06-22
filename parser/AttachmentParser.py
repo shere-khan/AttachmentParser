@@ -85,9 +85,24 @@ def create_disc_lobby_form(gov_tracking_no, dlf):
                  dlf.sig_blk_phone, dlf.sig_blk_date, select_gms_user(gov_tracking_no), "'sysdate'", "'@connector.name'")
 
 def create_lobby_perf_srvc(lps, gov_tracking_no):
-    print "insert into gms_gg_lobby_perf_srvc ()"\
-    "values"\
-    "()"%()
+    print "insert into gms_gg_lobby_perf_srvc"\
+    "(gms_gg_lobby_perf_srvc_id, gms_gg_disc_lobby_act_form_id,\n"\
+        "perf_srvc_name_prefix, perf_srvc_name_first, perf_srvc_name_middle,\n"\
+        "perf_srvc_name_last, perf_srvc_name_suffix, perf_srvc_address_street1,\n"\
+        "perf_srvc_address_street2, perf_srvc_address_city, perf_srvc_address_state,\n"\
+        "perf_srvc_address_zip, created_user_id, created_date,\n"\
+        "created_ip)\n"\
+    "values\n"\
+    "(gms_gg_lobby_perf_srvc_seq.nextval, (), %s, %s, %s, %s, %s, %s, %s, %s, %s,"\
+    "%s, %s, %s, %s)"%(select_disc_lobby_form_id(gov_tracking_no), lps.perf_serv_name_prefix,
+                       lps.perf_serv_name_first, lps.perf_serv_name_middle, lps.perf_serv_name_last,
+                       lps.perf_serv_name_suffix, lps.perf_serv_address_street1, lps.perf_serv_address_street2,
+                       lps.perf_serv_address_city, lps.perf_serv_address_state, lps.perf_serv_address_zip,
+                       select_gms_user(gov_tracking_no), "'sysdate'", "'@connector.name'")
+
+def select_disc_lobby_form_id(gov_tracking_no):
+    print "select gms_gg_disc_lobby_form_id from gms_gg_disc_lobby_form where"\
+          " gms_gg_form_id = (%s)"%(select_gms_gg_form_id(gov_tracking_no))
 
 def create_lobby_form(gov_tracking_no):
     pass
