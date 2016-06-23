@@ -6,6 +6,8 @@ import glob
 
 import AttachmentParser as AP
 
+import re
+
 def process(xml_file):
     # xml_file = xml_file.replace('\\', '\\\\')
     tree = ET.parse(xml_file);
@@ -198,12 +200,21 @@ def process(xml_file):
     
     # create_lobby_form(gov_tracking_no)
 
+def regexfunc(xml):
+    with open(xml) as f:
+        for line in f:
+            match = re.findall(r"(\w+)(?<!http)(?=:)", line)
+            if len(match) > 0:
+                print line.replace(match[0] + ':', '')
+
 if __name__ == '__main__':
     files = glob.glob(sys.argv[1] + "/*.xml")
     print files
-    count = 0
-    for attachment in files:
-        print "\n" + str(count) + "\n"
-        process(attachment)
-        count+=1
+    #count = 0
     
+    for attachment in files:
+        #print "\n" + str(count) + "\n"
+        process(attachment)
+        #count+=1
+    # print files[0]
+    # regexfunc(files[0])
