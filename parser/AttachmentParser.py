@@ -118,14 +118,15 @@ def extract_form_xml(form_xml_file, xml_begin_tag, xml_end_tag):
     with open(form_xml_file) as f:
         build_string = False 
         for line in f:
-            key_contact_begin = line.find(xml_begin_tag)
-            if key_contact_begin != -1:
+            if line.find(xml_begin_tag) > -1:
                 build_string = True
-            key_contact_end = line.find(xml_end_tag)
-            if key_contact_end > -1:
-                form_xml += line + ' '
+            if line.find(xml_end_tag) > -1:
+                match = re.findall(r"(\w+)(?<!http)(?=:)", line)
+                form_xml += line.replace(match[0] + ':', '') + ' '
                 break
             if build_string:
+                #if 'LobbyingActivitiesDisclosure_1_2' in line:
+                    #print 'yes'
                 match = re.findall(r"(\w+)(?<!http)(?=:)", line)
                 form_xml += line.replace(match[0] + ':', '')
         return form_xml.replace('\n', '')
