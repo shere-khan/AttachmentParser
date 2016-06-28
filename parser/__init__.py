@@ -38,13 +38,13 @@ def process(xml_file):
     gov_tracking_no = AP.extract_text('footer:GrantSubmissionFooter/footer:Grants_govTrackingNumber', root, ns)
 
     # Extract Key Contact Form XML data
-    key_contact_xml = AP.extract_form_xml(xml_file, '<Key_Contacts:Key_Contacts', '</Key_Contacts:Key_Contacts')
+    #key_contact_xml = AP.extract_form_xml(xml_file, '<Key_Contacts:Key_Contacts', '</Key_Contacts:Key_Contacts')
 
     # Print GMS_GG_FORM Sql insert statement
-    AP.create_gms_gg_form(gov_tracking_no, 'KEY_CONTACT_FORM', key_contact_xml)
+    #AP.create_gms_gg_form(gov_tracking_no, 'KEY_CONTACT_FORM', key_contact_xml)
 
     # Get APPLICANT_ORG_NAME text value
-    app_org_name = AP.extract_text('grant:Forms/Key_Contacts:Key_Contacts/Key_Contacts:ApplicantOrganizationName', root, ns)
+    #app_org_name = AP.extract_text('grant:Forms/Key_Contacts:Key_Contacts/Key_Contacts:ApplicantOrganizationName', root, ns)
 
     # AP.create_gg_key_contact_form(gov_tracking_no, app_org_name)
 
@@ -176,7 +176,6 @@ def process(xml_file):
     # Create Lobbying Performance Service Individuals objects
     for lps_node in root.iterfind(AP.get_ind_per_serv_text(), ns):
         lps = Forms.LobbyPerfSrvc()
-        tdfkj = AP.get_ind_per_serv_address_text() + AP.get_sflll_1_2_ns_text() + 'City'
         lps.set_perf_srvc_address_city(AP.extract_text(AP.get_ind_per_serv_address_text() + AP.get_sflll_1_2_ns_text() + 'City', lps_node, ns))
         lps.set_perf_srvc_address_state(AP.extract_text(AP.get_ind_per_serv_address_text() + AP.get_sflll_1_2_ns_text() + 'State', lps_node, ns))
         lps.set_perf_srvc_address_street1(AP.extract_text(AP.get_ind_per_serv_address_text() + AP.get_sflll_1_2_ns_text() + 'Street1', lps_node, ns))
