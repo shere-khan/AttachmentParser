@@ -53,9 +53,9 @@ def select_gms_gg_form_id(gov_tracking_no, form_type):
           " (select ref_code_type_id from ref_code_type where code_type='GG_FORM_TYPE'))"%(gov_tracking_no, form_type)
 
 def create_assurances_form(gov_tracking_no, representative_name, representative_title, applicant_org, submitted_date):
-    print "insert into gms_gg_assurances_form (gms_gg_assurances_form_id, gms_gg_form_id, representatitve_name,\n"\
-          "representative_title, applicant_orginization, submitted_date, created_user_id, created_date, created_ip)\nvalues\n"\
-          "(gms_gg_assurances_form_seq.nextval, (%s),\n%s, %s, %s, %s,\n(%s), sysdate, " \
+    print "insert into gms_gg_assurances_form (gms_gg_assurances_form_id, gms_gg_form_id, representative_name,\n"\
+          "representative_title, applicant_organization, submitted_date, created_user_id, created_date, created_ip)\nvalues\n"\
+          "(gms_gg_assurances_form_seq.nextval, (%s),\n%s, %s, %s, to_date(%s, 'YYYY-MM-DD'),\n(%s), sysdate, " \
           "'@connector.name');\n"%(select_gms_gg_form_id(gov_tracking_no, 'ASSURANCES_FORM'), representative_name, representative_title, applicant_org,
                                 submitted_date, select_gms_user(gov_tracking_no))
  
@@ -111,7 +111,7 @@ def create_lobby_form(gov_tracking_no):
 def extract_text(xpath, root_node, ns):
     node = root_node.find(xpath, ns)
     if node is not None and node.text is not None:
-        return "'" + node.text.replace('\n', '') + "'"
+        return "'" + node.text.replace('\n', '').replace('&', '"&"') + "'"
 
 def extract_form_xml(form_xml_file, xml_begin_tag, xml_end_tag):
     form_xml = '<?xml version="1.0" encoding="UTF-8"?>'
@@ -121,16 +121,23 @@ def extract_form_xml(form_xml_file, xml_begin_tag, xml_end_tag):
             if line.find(xml_begin_tag) > -1:
                 build_string = True
             if line.find(xml_end_tag) > -1:
-                match = re.findall(r"(\w+)(?<!http)(?=:)", line)
-                form_xml += line.replace(match[0] + ':', '') + ' '
+                matches = re.findall(r"(\w+)(?<!http)(?=:)", line)
+                #form_xml += line.replace(matches[0] + ':', '') + ' '
+                form_xml += replace_ns(matches, line)
                 break
             if build_string:
                 #if 'LobbyingActivitiesDisclosure_1_2' in line:
                     #print 'yes'
-                match = re.findall(r"(\w+)(?<!http)(?=:)", line)
-                form_xml += line.replace(match[0] + ':', '')
+                matches = re.findall(r"(\w+)(?<!http)(?=:)", line)
+                form_xml += replace_ns(matches, line)
+                #form_xml += line.replace(matches[0] + ':', '')
         return form_xml.replace('\n', '')
         # todo: may have to replace amp&; and such with actual values before inserting
+
+def replace_ns(matches, line):
+    for match in matches:
+        line = line.replace(match + ':', '')
+    return line 
 
 def get_report_entity_text():
     return get_lobbying_activities_disc_text() + get_sflll_1_2_ns_text() + 'ReportEntity'
