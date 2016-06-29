@@ -9,9 +9,9 @@ def create_gms_gg_form(gov_tracking_no, form_code, xml_data_string):
     print "insert into gms_gg_form \n(gms_gg_form_id, gms_gg_application_id, form_xml_document, ref_code_id_gg_form_type," \
           " created_user_id, created_date, created_ip)\nvalues\n" \
           "(gms_gg_form_seq.nextval, (select gms_gg_application_id from gms_gg_application where gms_application_id =\n(select gms_application_id from gmsg2k.gms_application where gov_tracking_no" \
-          "='%s')), '%s', \n(select ref_code_id from gmsg2k.ref_code where code = '%s'), " \
+          "=%s)), '%s', \n(select ref_code_id from gmsg2k.ref_code where code = '%s'), " \
           "(%s), sysdate, " \
-          "'@connector.name@');\n"%(gov_tracking_no, xml_data_string, form_code, select_gms_user(gov_tracking_no))
+          "'@connector.name');\n"%(gov_tracking_no, xml_data_string, form_code, select_gms_user(gov_tracking_no))
     
 def create_gg_key_contact_form(gov_tracking_no, app_org_name):
     select_gms_user_str = select_gms_user(gov_tracking_no)
@@ -21,7 +21,7 @@ def create_gg_key_contact_form(gov_tracking_no, app_org_name):
                                                     app_org_name, select_gms_user_str)
 
 def select_gms_user(gov_tracking_no):
-    return "select created_user_id from gmsg2k.gms_application where gov_tracking_no ='%s'"%(gov_tracking_no)
+    return "select created_user_id from gmsg2k.gms_application where gov_tracking_no =%s"%(gov_tracking_no)
 
 def create_gg_key_contact(gov_tracking_no, key_contact):
     #print select_gms_gg_key_contact_form_id(gov_tracking_no)
@@ -48,7 +48,7 @@ def select_gms_gg_key_contact_form_id(gov_tracking_no):
 def select_gms_gg_form_id(gov_tracking_no, form_type):
     return "select gms_gg_form_id from gms_gg_form where gms_gg_application_id =\n" \
           "(select gms_gg_application_id from gms_gg_application where gms_application_id = \n" \
-          "(select gms_application_id from gmsg2k.gms_application where gov_tracking_no='%s'))\n" \
+          "(select gms_application_id from gmsg2k.gms_application where gov_tracking_no=%s))\n" \
           " and ref_code_id_gg_form_type = (select ref_code_id from ref_code where code = '%s'\n and ref_code_type_id=" \
           " (select ref_code_type_id from ref_code_type where code_type='GG_FORM_TYPE'))"%(gov_tracking_no, form_type)
 
@@ -72,7 +72,7 @@ def create_disc_lobby_form(gov_tracking_no, dlf):
           "values\n"\
           "(gms_gg_disc_lobby_act_form_seq.nextval, (%s),\n%s, %s, %s, %s, %s, "\
           "%s, %s, %s, %s,\n%s, %s, %s, %s, %s, %s, %s, %s, %s, %s,\n%s, %s, %s,"\
-          "%s, %s, %s, %s, %s, %s, %s,\n%s, %s, %s, %s,\n%s, %s, %s, (%s), %s, %s"\
+          "%s, %s, %s, %s, %s, %s, %s,\n%s, %s, %s, %s,\n%s, %s, %s, %s, (%s), %s,"\
           "%s);\n"%(select_gms_gg_form_id(gov_tracking_no, 'DISC_LOBBY_FORM'), dlf.type_federal_action, dlf.status_federal_action,
                  dlf.report_type, dlf.material_change_year, dlf.material_change_qtr, dlf.last_report_date,
                  dlf.re_is_prime, dlf.prime_re_org_name, dlf.prime_re_address_street1, dlf.prime_re_address_street2,
@@ -111,7 +111,7 @@ def create_lobby_form(gov_tracking_no):
 def extract_text(xpath, root_node, ns):
     node = root_node.find(xpath, ns)
     if node is not None and node.text is not None:
-        return node.text.replace('\n', '')
+        return "'" + node.text.replace('\n', '') + "'"
 
 def extract_form_xml(form_xml_file, xml_begin_tag, xml_end_tag):
     form_xml = '<?xml version="1.0" encoding="UTF-8"?>'

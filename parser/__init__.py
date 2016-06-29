@@ -31,10 +31,10 @@ def process(xml_file):
           'SF424B': 'http://apply.grants.gov/forms/SF424B-V1.1',
           'ProtectionofHumanSubjects': 'http://apply.grants.gov/forms/ProtectionofHumanSubjects-V1.1',
           'SFLLL': 'http://apply.grants.gov/forms/SFLLL-V1.1',
-          'SFLLL_1_2': 'http://apply.grants.gov/forms/SFLLL_1_2-V1.2'}
+         'SFLLL_1_2': 'http://apply.grants.gov/forms/SFLLL_1_2-V1.2'}
 
     # Create GMS_GG_FORM_RECORD
-    # Get GMS_APPLCIATION_ID 
+    # Get GMS_APPLCIATIO'N_ID 
     gov_tracking_no = AP.extract_text('footer:GrantSubmissionFooter/footer:Grants_govTrackingNumber', root, ns)
 
     # Extract Key Contact Form XML data
@@ -47,7 +47,7 @@ def process(xml_file):
     #app_org_name = AP.extract_text('grant:Forms/Key_Contacts:Key_Contacts/Key_Contacts:ApplicantOrganizationName', root, ns)
 
     # AP.create_gg_key_contact_form(gov_tracking_no, app_org_name)
-
+ 
     # Create GMS_GG_KEY_CONTACT_FORM record
     # contact_order = 0
     # for elem in root.findall('grant:Forms/Key_Contacts:Key_Contacts/Key_Contacts:RoleOnProject', ns):
@@ -115,7 +115,7 @@ def process(xml_file):
     dlf.set_status_federal_action(AP.extract_text(AP.get_lobbying_activities_disc_text() + AP.get_sflll_1_2_ns_text() + 'FederalActionStatus', root, ns))
     dlf.set_report_type(AP.extract_text(AP.get_lobbying_activities_disc_text() + AP.get_sflll_1_2_ns_text() + 'ReportType', root, ns))
 
-    dlf.set_material_change_qtr(material_change_qtr = AP.extract_text(AP.get_lobbying_activities_disc_text() + AP.get_sflll_1_2_ns_text() + 'MaterialChangeSupplement' + AP.get_sflll_1_2_ns_text() + 'MaterialChangeQuarter', root, ns))
+    dlf.set_material_change_qtr(AP.extract_text(AP.get_lobbying_activities_disc_text() + AP.get_sflll_1_2_ns_text() + 'MaterialChangeSupplement' + AP.get_sflll_1_2_ns_text() + 'MaterialChangeQuarter', root, ns))
     dlf.set_material_change_year(AP.extract_text(AP.get_lobbying_activities_disc_text() + '/MaterialChangeSupplement/MaterialChangeYear"', root, ns))
     dlf.set_last_report_date(AP.extract_text(AP.get_lobbying_activities_disc_text() + '/MaterialChangeSupplement/LastReportDate', root, ns))
 
@@ -208,7 +208,6 @@ def regexfunc(xml):
 
 if __name__ == '__main__':
     files = glob.glob(sys.argv[1] + "/*.xml")
-    print files
     #count = 0
     
     for attachment in files:
