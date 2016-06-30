@@ -11,7 +11,7 @@ def create_gms_gg_form(gov_tracking_no, form_code, xml_data_string):
           "(gms_gg_form_seq.nextval, (select gms_gg_application_id from gms_gg_application where gms_application_id =\n(select gms_application_id from gmsg2k.gms_application where gov_tracking_no" \
           "=%s)), '%s', \n(select ref_code_id from gmsg2k.ref_code where code = '%s'), " \
           "(%s), sysdate, " \
-          "'@connector.name');\n"%(gov_tracking_no, xml_data_string, form_code, select_gms_user(gov_tracking_no))
+          "'@connector.name@');\n"%(gov_tracking_no, xml_data_string, form_code, select_gms_user(gov_tracking_no))
     
 def create_gg_key_contact_form(gov_tracking_no, app_org_name):
     select_gms_user_str = select_gms_user(gov_tracking_no)
@@ -33,7 +33,7 @@ def create_gg_key_contact(gov_tracking_no, key_contact):
           "contact_address_province, contact_address_zip,\n contact_address_country, contact_fax, contact_email," \
           " contact_phone, created_user_id, created_date, created_ip)\nvalues\n" \
           "(gms_gg_key_contact_seq.nextval, (%s), %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s," \
-          "%s, %s, %s, %s, %s, %s, %s, %s, %s, (%s), sysdate, '@connector.name');" \
+          "%s, %s, %s, %s, %s, %s, %s, %s, %s, (%s), sysdate, '@connector.name@');" \
           "\n"%(select_gms_gg_key_contact_form_id(gov_tracking_no), key_contact.contact_order, key_contact.project_role,
                 key_contact.prefix_name, key_contact.first_name, key_contact.middle_name,
                 key_contact.last_name, key_contact.suffix_name, key_contact.contact_title,
@@ -56,7 +56,7 @@ def create_assurances_form(gov_tracking_no, representative_name, representative_
     print "insert into gms_gg_assurances_form (gms_gg_assurances_form_id, gms_gg_form_id, representative_name,\n"\
           "representative_title, applicant_organization, submitted_date, created_user_id, created_date, created_ip)\nvalues\n"\
           "(gms_gg_assurances_form_seq.nextval, (%s),\n%s, %s, %s, to_date(%s, 'YYYY-MM-DD'),\n(%s), sysdate, " \
-          "'@connector.name');\n"%(select_gms_gg_form_id(gov_tracking_no, 'ASSURANCES_FORM'), representative_name, representative_title, applicant_org,
+          "'@connector.name@');\n"%(select_gms_gg_form_id(gov_tracking_no, 'ASSURANCES_FORM'), representative_name, representative_title, applicant_org,
                                 submitted_date, select_gms_user(gov_tracking_no))
  
 def create_disc_lobby_form(gov_tracking_no, dlf):
@@ -72,7 +72,7 @@ def create_disc_lobby_form(gov_tracking_no, dlf):
           "values\n"\
           "(gms_gg_disc_lobby_act_form_seq.nextval, (%s),\n%s, %s, %s, %s, %s, "\
           "%s, %s, %s, %s,\n%s, %s, %s, %s, %s, %s, %s, %s, %s, %s,\n%s, %s, %s,"\
-          "%s, %s, %s, %s, %s, %s, %s,\n%s, %s, %s, %s,\n%s, %s, %s, %s, (%s), %s,"\
+          "%s, %s, %s, %s, %s, %s, %s,\n%s, %s, %s, %s,\n%s, %s, %s, to_date(%s, 'YYYY-MM-DD'), (%s), %s,"\
           "%s);\n"%(select_gms_gg_form_id(gov_tracking_no, 'DISC_LOBBY_FORM'), dlf.type_federal_action, dlf.status_federal_action,
                  dlf.report_type, dlf.material_change_year, dlf.material_change_qtr, dlf.last_report_date,
                  dlf.re_is_prime, dlf.prime_re_org_name, dlf.prime_re_address_street1, dlf.prime_re_address_street2,
@@ -83,7 +83,7 @@ def create_disc_lobby_form(gov_tracking_no, dlf):
                  dlf.lobby_reg_address_street1, dlf.lobby_reg_address_street2, dlf.lobby_reg_address_city,
                  dlf.lobby_reg_address_state, dlf.lobby_reg_address_zip, dlf.sig_blk_name_prefix,
                  dlf.sig_blk_name_first, dlf.sig_blk_name_middle, dlf.sig_blk_name_last, dlf.sig_blk_name_suffix,
-                 dlf.sig_blk_phone, dlf.sig_blk_date, select_gms_user(gov_tracking_no), "'sysdate'", "'@connector.name'")
+                 dlf.sig_blk_phone, dlf.sig_blk_date, select_gms_user(gov_tracking_no), "sysdate", "'@connector.name@'")
 
 def create_lobby_perf_srvc(lps, gov_tracking_no):
     print "insert into gms_gg_lobby_perf_srvc"\
@@ -99,7 +99,7 @@ def create_lobby_perf_srvc(lps, gov_tracking_no):
                        lps.perf_serv_name_first, lps.perf_serv_name_middle, lps.perf_serv_name_last,
                        lps.perf_serv_name_suffix, lps.perf_serv_address_street1, lps.perf_serv_address_street2,
                        lps.perf_serv_address_city, lps.perf_serv_address_state, lps.perf_serv_address_zip,
-                       select_gms_user(gov_tracking_no), "'sysdate'", "'@connector.name'")
+                       select_gms_user(gov_tracking_no), "'sysdate'", "'@connector.name@'")
 
 def select_disc_lobby_form_id(gov_tracking_no):
     return "select gms_gg_disc_lobby_form_id from gms_gg_disc_lobby_form where\n"\
@@ -111,7 +111,8 @@ def create_lobby_form(gov_tracking_no):
 def extract_text(xpath, root_node, ns):
     node = root_node.find(xpath, ns)
     if node is not None and node.text is not None:
-        return "'" + node.text.replace('\n', '').replace('&', '"&"') + "'"
+        return "'" + node.text.replace('\n', '').replace('&amp;', 'and').replace('&', 'and') + "'"
+    #.replace('&', '"&"') + "'"
 
 def extract_form_xml(form_xml_file, xml_begin_tag, xml_end_tag):
     form_xml = '<?xml version="1.0" encoding="UTF-8"?>'
@@ -122,17 +123,16 @@ def extract_form_xml(form_xml_file, xml_begin_tag, xml_end_tag):
                 build_string = True
             if line.find(xml_end_tag) > -1:
                 matches = re.findall(r"(\w+)(?<!http)(?=:)", line)
-                #form_xml += line.replace(matches[0] + ':', '') + ' '
+                line = re.sub(r'(&)(?!amp)', 'and', line)
+                line = re.sub(r'(&amp;)', 'and', line)
                 form_xml += replace_ns(matches, line)
                 break
             if build_string:
-                #if 'LobbyingActivitiesDisclosure_1_2' in line:
-                    #print 'yes'
                 matches = re.findall(r"(\w+)(?<!http)(?=:)", line)
+                line = re.sub(r'(&)(?!amp)', 'and', line)
+                line = re.sub(r'(&amp;)', 'and', line)
                 form_xml += replace_ns(matches, line)
-                #form_xml += line.replace(matches[0] + ':', '')
         return form_xml.replace('\n', '')
-        # todo: may have to replace amp&; and such with actual values before inserting
 
 def replace_ns(matches, line):
     for match in matches:

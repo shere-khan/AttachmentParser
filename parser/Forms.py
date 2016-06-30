@@ -82,7 +82,8 @@ class DiscLobbyForm(object):
         
     def set_re_is_prime(self, re_is_prime):
         if re_is_prime is not None:
-            self.re_is_prime = re_is_prime
+            if 'Y: Yes' in re_is_prime:
+                self.re_is_prime = "'Y'"
         
     def set_prime_re_org_name(self, prime_re_org_name):
         if prime_re_org_name is not None:
