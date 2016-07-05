@@ -68,11 +68,11 @@ def create_disc_lobby_form(gov_tracking_no, dlf):
           "fdrl_action_number, award_amount, lobby_reg_name_prefix, lobby_reg_name_first, lobby_reg_name_middle, lobby_reg_name_last,\n"\
           "lobby_reg_name_suffix, lobby_reg_address_street1, lobby_reg_address_street2, lobby_reg_address_city, lobby_reg_address_state,\n"\
           "lobby_reg_address_zip, sig_blk_name_prefix, sig_blk_name_first, sig_blk_name_middle, sig_blk_name_last,\n"\
-          "sig_blk_name_suffix, sig_blk_phone, sig_blk_date, created_user_id, created_date, created_ip)\n"\
+          "sig_blk_name_suffix, sig_blk_phone, sig_blk_date, sig_blk_signature, created_user_id, created_date, created_ip)\n"\
           "values\n"\
           "(gms_gg_disc_lobby_act_form_seq.nextval, (%s),\n%s, %s, %s, %s, %s, "\
           "%s, %s, %s, %s,\n%s, %s, %s, %s, %s, %s, %s, %s, %s, %s,\n%s, %s, %s,"\
-          "%s, %s, %s, %s, %s, %s, %s,\n%s, %s, %s, %s,\n%s, %s, %s, to_date(%s, 'YYYY-MM-DD'), (%s), %s,"\
+          "%s, %s, %s, %s, %s, %s, %s,\n%s, %s, %s, %s,\n%s, %s, %s, to_date(%s, 'YYYY-MM-DD'), %s, (%s), %s,"\
           "%s);\n"%(select_gms_gg_form_id(gov_tracking_no, 'DISC_LOBBY_FORM'), dlf.type_federal_action, dlf.status_federal_action,
                  dlf.report_type, dlf.material_change_year, dlf.material_change_qtr, dlf.last_report_date,
                  dlf.re_is_prime, dlf.prime_re_org_name, dlf.prime_re_address_street1, dlf.prime_re_address_street2,
@@ -83,7 +83,7 @@ def create_disc_lobby_form(gov_tracking_no, dlf):
                  dlf.lobby_reg_address_street1, dlf.lobby_reg_address_street2, dlf.lobby_reg_address_city,
                  dlf.lobby_reg_address_state, dlf.lobby_reg_address_zip, dlf.sig_blk_name_prefix,
                  dlf.sig_blk_name_first, dlf.sig_blk_name_middle, dlf.sig_blk_name_last, dlf.sig_blk_name_suffix,
-                 dlf.sig_blk_phone, dlf.sig_blk_date, select_gms_user(gov_tracking_no), "sysdate", "'@connector.name@'")
+                 dlf.sig_blk_phone, dlf.sig_blk_date, dlf.sig_blk_signature, select_gms_user(gov_tracking_no), "sysdate", "'@connector.name@'")
 
 def create_lobby_perf_srvc(lps, gov_tracking_no):
     print "insert into gms_gg_lobby_perf_srvc"\
@@ -99,10 +99,10 @@ def create_lobby_perf_srvc(lps, gov_tracking_no):
                        lps.perf_serv_name_first, lps.perf_serv_name_middle, lps.perf_serv_name_last,
                        lps.perf_serv_name_suffix, lps.perf_serv_address_street1, lps.perf_serv_address_street2,
                        lps.perf_serv_address_city, lps.perf_serv_address_state, lps.perf_serv_address_zip,
-                       select_gms_user(gov_tracking_no), "'sysdate'", "'@connector.name@'")
+                       select_gms_user(gov_tracking_no), "sysdate", "'@connector.name@'")
 
 def select_disc_lobby_form_id(gov_tracking_no):
-    return "select gms_gg_disc_lobby_form_id from gms_gg_disc_lobby_form where\n"\
+    return "select gms_gg_disc_lobby_act_form_id from gms_gg_disc_lobby_act_form where\n"\
           " gms_gg_form_id = (%s)\n"%(select_gms_gg_form_id(gov_tracking_no, 'DISC_LOBBY_FORM'))
 
 def create_lobby_form(gov_tracking_no):
@@ -111,7 +111,9 @@ def create_lobby_form(gov_tracking_no):
 def extract_text(xpath, root_node, ns):
     node = root_node.find(xpath, ns)
     if node is not None and node.text is not None:
-        return "'" + node.text.replace('\n', '').replace('&amp;', 'and').replace('&', 'and') + "'"
+        return "'" + node.text.replace('\n', '') + "'"
+    #.replace('&amp;', '')
+    #.replace('&', 'and') + "'"
     #.replace('&', '"&"') + "'"
 
 def extract_form_xml(form_xml_file, xml_begin_tag, xml_end_tag):
@@ -123,14 +125,14 @@ def extract_form_xml(form_xml_file, xml_begin_tag, xml_end_tag):
                 build_string = True
             if line.find(xml_end_tag) > -1:
                 matches = re.findall(r"(\w+)(?<!http)(?=:)", line)
-                line = re.sub(r'(&)(?!amp)', 'and', line)
-                line = re.sub(r'(&amp;)', 'and', line)
+                #line = re.sub(r'(&)(?!amp)', 'and', line)
+                #line = re.sub(r'(&amp;)', 'and', line)
                 form_xml += replace_ns(matches, line)
                 break
             if build_string:
                 matches = re.findall(r"(\w+)(?<!http)(?=:)", line)
-                line = re.sub(r'(&)(?!amp)', 'and', line)
-                line = re.sub(r'(&amp;)', 'and', line)
+                #line = re.sub(r'(&)(?!amp)', 'and', line)
+                #line = re.sub(r'(&amp;)', 'and', line)
                 form_xml += replace_ns(matches, line)
         return form_xml.replace('\n', '')
 
