@@ -206,13 +206,28 @@ def regexfunc(xml):
             if len(match) > 0:
                 print line.replace(match[0] + ':', '')
 
+def insert_gms_applications(attachment):
+    gov_track = attachment.split('_')[2].split('\\')[2]
+    print "insert into gms_application (gms_application_id, gov_tracking_no)"\
+    "values (gms_application_seq.nextval, '%s');\n"%(gov_track)
+
+    print "insert into gms_gg_application (gms_gg_application_id, gms_application_id) values (gms_gg_application_seq.nextval,"\
+    "(select gms_application_id from gms_application where gov_tracking_no = '%s'));\n"%(gov_track)
+    
+def delete_gms_applications(attachment):
+    gov_track = attachment.split('_')[2].split('\\')[2]
+    print "delete from gms_application where gov_tracking_no='%s';"%(gov_track)
+
+def select_gms_applications(attachment):
+    gov_track = attachment.split('_')[2].split('\\')[2]
+    print "select gms_application_id from gms_application where gov_tracking_no='%s';"%(gov_track)
+
 if __name__ == '__main__':
     files = glob.glob(sys.argv[1] + "/*.xml")
     #count = 0
     
     for attachment in files:
-        #print "\n" + str(count) + "\n"
+        #insert_gms_applications(attachment)
+        #delete_gms_applications(attachment)
+        # select_gms_applications(attachment)
         process(attachment)
-        #count+=1
-    # print files[0]
-    # regexfunc(files[0])

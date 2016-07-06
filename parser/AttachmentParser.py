@@ -68,11 +68,11 @@ def create_disc_lobby_form(gov_tracking_no, dlf):
           "fdrl_action_number, award_amount, lobby_reg_name_prefix, lobby_reg_name_first, lobby_reg_name_middle, lobby_reg_name_last,\n"\
           "lobby_reg_name_suffix, lobby_reg_address_street1, lobby_reg_address_street2, lobby_reg_address_city, lobby_reg_address_state,\n"\
           "lobby_reg_address_zip, sig_blk_name_prefix, sig_blk_name_first, sig_blk_name_middle, sig_blk_name_last,\n"\
-          "sig_blk_name_suffix, sig_blk_phone, sig_blk_date, sig_blk_signature, created_user_id, created_date, created_ip)\n"\
+          "sig_blk_name_suffix, sig_blk_phone, sig_blk_date, sig_blk_signature, sig_blk_title, created_user_id, created_date, created_ip)\n"\
           "values\n"\
           "(gms_gg_disc_lobby_act_form_seq.nextval, (%s),\n%s, %s, %s, %s, %s, "\
           "%s, %s, %s, %s,\n%s, %s, %s, %s, %s, %s, %s, %s, %s, %s,\n%s, %s, %s,"\
-          "%s, %s, %s, %s, %s, %s, %s,\n%s, %s, %s, %s,\n%s, %s, %s, to_date(%s, 'YYYY-MM-DD'), %s, (%s), %s,"\
+          "%s, %s, %s, %s, %s, %s, %s,\n%s, %s, %s, %s,\n%s, %s, %s, to_date(%s, 'YYYY-MM-DD'), %s, %s, (%s), %s,"\
           "%s);\n"%(select_gms_gg_form_id(gov_tracking_no, 'DISC_LOBBY_FORM'), dlf.type_federal_action, dlf.status_federal_action,
                  dlf.report_type, dlf.material_change_year, dlf.material_change_qtr, dlf.last_report_date,
                  dlf.re_is_prime, dlf.prime_re_org_name, dlf.prime_re_address_street1, dlf.prime_re_address_street2,
@@ -83,7 +83,7 @@ def create_disc_lobby_form(gov_tracking_no, dlf):
                  dlf.lobby_reg_address_street1, dlf.lobby_reg_address_street2, dlf.lobby_reg_address_city,
                  dlf.lobby_reg_address_state, dlf.lobby_reg_address_zip, dlf.sig_blk_name_prefix,
                  dlf.sig_blk_name_first, dlf.sig_blk_name_middle, dlf.sig_blk_name_last, dlf.sig_blk_name_suffix,
-                 dlf.sig_blk_phone, dlf.sig_blk_date, dlf.sig_blk_signature, select_gms_user(gov_tracking_no), "sysdate", "'@connector.name@'")
+                 dlf.sig_blk_phone, dlf.sig_blk_date, dlf.sig_blk_signature, dlf.sig_blk_title, select_gms_user(gov_tracking_no), "sysdate", "'@connector.name@'")
 
 def create_lobby_perf_srvc(lps, gov_tracking_no):
     print "insert into gms_gg_lobby_perf_srvc"\
@@ -111,7 +111,7 @@ def create_lobby_form(gov_tracking_no):
 def extract_text(xpath, root_node, ns):
     node = root_node.find(xpath, ns)
     if node is not None and node.text is not None:
-        return "'" + node.text.replace('\n', '') + "'"
+        return "'" + node.text.replace('\n', '').rstrip() + "'"
     #.replace('&amp;', '')
     #.replace('&', 'and') + "'"
     #.replace('&', '"&"') + "'"
