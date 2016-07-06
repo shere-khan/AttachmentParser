@@ -31,8 +31,8 @@ def create_gg_key_contact(gov_tracking_no, key_contact):
           " contact_address_street2,\n contact_address_city, contact_address_county, contact_address_state, " \
           "contact_address_province, contact_address_zip,\n contact_address_country, contact_fax, contact_email," \
           " contact_phone, created_user_id, created_date, created_ip)\nvalues\n" \
-          "(gms_gg_key_contact_seq.nextval, (%s), %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s," \
-          "%s, %s, %s, %s, %s, %s, %s, %s, %s, (%s), sysdate, '@connector.name@');" \
+          "(gms_gg_key_contact_seq.nextval, (%s), \n%s, %s, %s, %s, %s, %s, %s, %s, %s,\n%s, %s," \
+          "%s, %s, %s, %s, %s, %s, \n%s, %s, %s, (%s), sysdate, '@connector.name@');" \
           "\n"%(select_gms_gg_key_contact_form_id(gov_tracking_no), key_contact.contact_order, key_contact.project_role,
                 key_contact.prefix_name, key_contact.first_name, key_contact.middle_name,
                 key_contact.last_name, key_contact.suffix_name, key_contact.contact_title,
@@ -71,7 +71,7 @@ def create_disc_lobby_form(gov_tracking_no, dlf):
           "values\n"\
           "(gms_gg_disc_lobby_act_form_seq.nextval, (%s),\n%s, %s, %s, %s, %s, "\
           "%s, %s, %s, %s,\n%s, %s, %s, %s, %s, %s, %s, %s, %s, %s,\n%s, %s, %s,"\
-          "%s, %s, %s, %s, %s, %s, %s,\n%s, %s, %s, %s,\n%s, %s, %s, to_date(%s, 'YYYY-MM-DD'), %s, %s, (%s), %s,"\
+          "%s, %s, %s, %s, %s, %s, %s,\n%s, %s, %s, %s,\n%s, %s, %s, to_date(%s, 'YYYY-MM-DD'),\n%s, %s, (%s), %s,"\
           "%s);\n"%(select_gms_gg_form_id(gov_tracking_no, 'DISC_LOBBY_FORM'), dlf.type_federal_action, dlf.status_federal_action,
                  dlf.report_type, dlf.material_change_year, dlf.material_change_qtr, dlf.last_report_date,
                  dlf.re_is_prime, dlf.prime_re_org_name, dlf.prime_re_address_street1, dlf.prime_re_address_street2,
@@ -121,11 +121,15 @@ def extract_form_xml(form_xml_file, xml_begin_tag, xml_end_tag):
                 build_string = True
             if line.find(xml_end_tag) > -1:
                 matches = re.findall(r"(\w+)(?<!http)(?=:)", line)
-                form_xml += replace_ns(matches, line)
+                form_xml += replace_ns(matches, line).replace('\n', '').strip() + ' '
                 break
             if build_string:
                 matches = re.findall(r"(\w+)(?<!http)(?=:)", line)
-                form_xml += replace_ns(matches, line)
+                # ws_matches_begin = re.findall(r"(^\s)(?=<)")
+                # ws_matches_end = re.findall(r"($\s)(?=<)")
+                replace_string = replace_ns(matches, line).replace('\n', '').strip() + ' '
+                form_xml += replace_string
+
         return form_xml.replace('\n', '')
 
 def replace_ns(matches, line):
