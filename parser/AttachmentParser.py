@@ -9,16 +9,15 @@ def create_gms_gg_form(gov_tracking_no, form_code, xml_data_string):
     print "insert into gms_gg_form \n(gms_gg_form_id, gms_gg_application_id, form_xml_document, ref_code_id_gg_form_type," \
           " created_user_id, created_date, created_ip)\nvalues\n" \
           "(gms_gg_form_seq.nextval, (select gms_gg_application_id from gms_gg_application where gms_application_id =\n(select gms_application_id from gmsg2k.gms_application where gov_tracking_no" \
-          "=%s)), '%s', \n(select ref_code_id from gmsg2k.ref_code where code = '%s'), " \
+          "=%s)), xmltype('%s'), \n(select ref_code_id from gmsg2k.ref_code where code = '%s'), " \
           "(%s), sysdate, " \
           "'@connector.name@');\n"%(gov_tracking_no, xml_data_string, form_code, select_gms_user(gov_tracking_no))
     
 def create_gg_key_contact_form(gov_tracking_no, app_org_name):
-    select_gms_user_str = select_gms_user(gov_tracking_no)
     print "insert into gms_gg_key_contact_form\n(gms_gg_key_contact_form_id, gms_gg_form_id, applicant_org_name, created_user_id," \
-          "created_date, created_ip) values\n(gms_gg_key_contact_form_seq.nextval, (%s),\n'%s'," \
-          ", (%s), sysdate, '@connector.name@');\n"%(select_gms_gg_form_id(gov_tracking_no, 'KEY_CONTACT_FORM'),
-                                                    app_org_name, select_gms_user_str)
+          "created_date, created_ip) values\n(gms_gg_key_contact_form_seq.nextval, (%s), %s,\n" \
+          "(%s), sysdate, '@connector.name@');\n"%(select_gms_gg_form_id(gov_tracking_no, 'KEY_CONTACT_FORM'),
+                                                    app_org_name, select_gms_user(gov_tracking_no))
 
 def select_gms_user(gov_tracking_no):
     return "select created_user_id from gmsg2k.gms_application where gov_tracking_no =%s"%(gov_tracking_no)
@@ -112,9 +111,6 @@ def extract_text(xpath, root_node, ns):
     node = root_node.find(xpath, ns)
     if node is not None and node.text is not None:
         return "'" + node.text.replace('\n', '').rstrip() + "'"
-    #.replace('&amp;', '')
-    #.replace('&', 'and') + "'"
-    #.replace('&', '"&"') + "'"
 
 def extract_form_xml(form_xml_file, xml_begin_tag, xml_end_tag):
     form_xml = '<?xml version="1.0" encoding="UTF-8"?>'
@@ -125,14 +121,10 @@ def extract_form_xml(form_xml_file, xml_begin_tag, xml_end_tag):
                 build_string = True
             if line.find(xml_end_tag) > -1:
                 matches = re.findall(r"(\w+)(?<!http)(?=:)", line)
-                #line = re.sub(r'(&)(?!amp)', 'and', line)
-                #line = re.sub(r'(&amp;)', 'and', line)
                 form_xml += replace_ns(matches, line)
                 break
             if build_string:
                 matches = re.findall(r"(\w+)(?<!http)(?=:)", line)
-                #line = re.sub(r'(&)(?!amp)', 'and', line)
-                #line = re.sub(r'(&amp;)', 'and', line)
                 form_xml += replace_ns(matches, line)
         return form_xml.replace('\n', '')
 
