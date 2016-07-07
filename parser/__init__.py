@@ -171,7 +171,6 @@ def create_disc_lobby_sql(xml_file, root, ns, gov_tracking_no):
 
     # Extract Lobby Form XML String
     # lobby_form_xml = AP.extract_form_xml(xml_file, '<SLFFF_1_2:LobbyingForm', '</SLFFF_1_2:LobbyingForm')
-    # AP.create_gms_gg_form(gov_tracking_no, 'LOBBY_FORM', lobby_form_xml)
 
     # Create Lobbying Performance Service Individuals objects
     for lps_node in root.iterfind(AP.get_ind_per_serv_text(), ns):
@@ -190,15 +189,14 @@ def create_disc_lobby_sql(xml_file, root, ns, gov_tracking_no):
         AP.create_lobby_perf_srvc(lps, gov_tracking_no)
 
 def create_lobby_form(xml_file, root, ns, gov_tracking_no):
-    # lobby_form_xml = AP.extract_form_xml(xml_file, '<SFLLL_1_2:LobbyingForm', '</SFLLL_1_2:LobbyingActivitiesDisclosure')
+
     # If null, search for other form of tag
-    # if xml_file is None:
-        # disc_lobby_form_xml = AP.extract_form_xml(xml_file, '<SFLLL:LobbyingActivitiesDisclosure', '</SFLLL:LobbyingActivitiesDisclosure')
+    if xml_file is None:
+        lobby_form_xml = AP.extract_form_xml(xml_file, '<SFLLL_1_2:LobbyingForm', '</SFLLL_1_2:LobbyingForm')
         
-    #AP.create_gms_gg_form(gov_tracking_no, 'DISC_LOBBY_FORM', disc_lobby_form_xml)
-    # create_gms_gg_form(gov_tracking_no, 'LOBBY_FORM', lobby_form_xml)
+    AP.create_gms_gg_form(gov_tracking_no, 'LOBBY_FORM', lobby_form_xml)
     
-    #create_lobby_form(gov_tracking_no)
+    create_lobby_form(gov_tracking_no)
     pass
 
 def create_assurances_sql(xml_file, root, ns, gov_tracking_no):

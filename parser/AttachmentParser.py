@@ -110,7 +110,7 @@ def create_lobby_form(gov_tracking_no):
 def extract_text(xpath, root_node, ns):
     node = root_node.find(xpath, ns)
     if node is not None and node.text is not None:
-        return "'" + node.text.replace('\n', '').rstrip() + "'"
+        return "'" + node.text.replace('\n', '').strip() + "'"
 
 def extract_form_xml(form_xml_file, xml_begin_tag, xml_end_tag):
     form_xml = '<?xml version="1.0" encoding="UTF-8"?>'
@@ -125,11 +125,8 @@ def extract_form_xml(form_xml_file, xml_begin_tag, xml_end_tag):
                 break
             if build_string:
                 matches = re.findall(r"(\w+)(?<!http)(?=:)", line)
-                # ws_matches_begin = re.findall(r"(^\s)(?=<)")
-                # ws_matches_end = re.findall(r"($\s)(?=<)")
                 replace_string = replace_ns(matches, line).replace('\n', '').strip() + ' '
                 form_xml += replace_string
-
         return form_xml.replace('\n', '')
 
 def replace_ns(matches, line):
